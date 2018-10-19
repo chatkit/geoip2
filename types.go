@@ -16,6 +16,32 @@ package geoip2
 
 import "fmt"
 
+const (
+	UserTypeBusiness               = "business"
+	UserTypeCafe                   = "cafe"
+	UserTypeCellular               = "cellular"
+	UserTypeCollege                = "college"
+	UserTypeContentDeliveryNetwork = "content_delivery_network"
+	UserTypeDialup                 = "dialup"
+	UserTypeGovernment             = "government"
+	UserTypeHosting                = "hosting"
+	UserTypeLibrary                = "library"
+	UserTypeMilitary               = "military"
+	UserTypeResidential            = "residential"
+	UserTypeRouter                 = "router"
+	UserTypeSchool                 = "school"
+	UserTypeSearchEngineSpider     = "search_engine_spider"
+	UserTypeTraveler               = "traveler"
+
+	ContinentAfrica       = "AF"
+	ContinentAntarctica   = "AN"
+	ContinentAsia         = "AS"
+	ContinentEurope       = "EU"
+	ContinentNorthAmerica = "NA"
+	ContinentOceania      = "OC"
+	ContinentSouthAmerica = "SA"
+)
+
 type Error struct {
 	Code string `json:"code,omitempty"`
 	Err  string `json:"error,omitempty"`
@@ -38,10 +64,11 @@ type Continent struct {
 }
 
 type Country struct {
-	Confidence int               `json:"confidence,omitempty"`
-	GeoNameId  int               `json:"geoname_id,omitempty"`
-	IsoCode    string            `json:"iso_code,omitempty"`
-	Names      map[string]string `json:"names,omitempty"`
+	Confidence        int               `json:"confidence,omitempty"`
+	GeoNameId         int               `json:"geoname_id,omitempty"`
+	IsInEuropeanUnion bool              `json:"is_in_european_union,omitempty"`
+	IsoCode           string            `json:"iso_code,omitempty"`
+	Names             map[string]string `json:"names,omitempty"`
 }
 
 type Location struct {
@@ -60,16 +87,18 @@ type Postal struct {
 }
 
 type RegisteredCountry struct {
-	GeoNameId int               `json:"geoname_id,omitempty"`
-	IsoCode   string            `json:"iso_code,omitempty"`
-	Names     map[string]string `json:"names,omitempty"`
+	GeoNameId         int               `json:"geoname_id,omitempty"`
+	IsInEuropeanUnion bool              `json:"is_in_european_union,omitempty"`
+	IsoCode           string            `json:"iso_code,omitempty"`
+	Names             map[string]string `json:"names,omitempty"`
 }
 
 type RepresentedCountry struct {
-	GeoNameId int               `json:"geoname_id,omitempty"`
-	IsoCode   string            `json:"iso_code,omitempty"`
-	Names     map[string]string `json:"names,omitempty"`
-	Type      string            `json:"type,omitempty"`
+	GeoNameId         int               `json:"geoname_id,omitempty"`
+	IsInEuropeanUnion bool              `json:"is_in_european_union,omitempty"`
+	IsoCode           string            `json:"iso_code,omitempty"`
+	Names             map[string]string `json:"names,omitempty"`
+	Type              string            `json:"type,omitempty"`
 }
 
 type Subdivision struct {
@@ -80,15 +109,20 @@ type Subdivision struct {
 }
 
 type Traits struct {
-	AutonomousSystemNumber       int    `json:"autonomous_system_number,omitempty"`
-	AutonomousSystemOrganization string `json:"autonomous_system_organization,omitempty"`
-	Domain                       string `json:"domain,omitempty"`
-	IsAnonymousProxy             bool   `json:"is_anonymous_proxy,omitempty"`
-	IsSatelliteProvider          bool   `json:"is_satellite_provider,omitempty"`
-	Isp                          string `json:"isp,omitempty"`
-	IpAddress                    string `json:"ip_address,omitempty"`
-	Organization                 string `json:"organization,omitempty"`
-	UserType                     string `json:"user_type,omitempty"`
+	AutonomousSystemNumber        int    `json:"autonomous_system_number,omitempty"`
+	AutonomousSystemOrganization  string `json:"autonomous_system_organization,omitempty"`
+	Domain                        string `json:"domain,omitempty"`
+	IsAnonymous                   bool   `json:"is_anonymous,omitempty"`
+	IsAnonymousVPN                bool   `json:"is_anonymous_vpn,omitempty"`
+	IsHostingProvider             bool   `json:"is_hosting_provider,omitempty"`
+	IsPublicProxy                 bool   `json:"is_public_proxy,omitempty"`
+	IsTorExitNode                 bool   `json:"is_tor_exit_node,omitempty"`
+	Isp                           string `json:"isp,omitempty"`
+	IpAddress                     string `json:"ip_address,omitempty"`
+	Organization                  string `json:"organization,omitempty"`
+	UserType                      string `json:"user_type,omitempty"`
+	DeprecatedIsAnonymousProxy    bool   `json:"is_anonymous_proxy,omitempty"`    // NOTE: Deprecated
+	DeprecatedIsSatelliteProvider bool   `json:"is_satellite_provider,omitempty"` // NOTE: Deprecated
 }
 
 type MaxMind struct {
